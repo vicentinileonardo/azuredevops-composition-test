@@ -10,5 +10,6 @@ spec:
     name: connectorconfig-sample
 
   organization: {{ .Values.azureDevOps.organization }}
-  project: {{ .Values.teamProject.name }}
+  projectRef:
+    name: {{ .Values.teamProject.name | lower }}
   name: {{ .Values.environment.name }}
