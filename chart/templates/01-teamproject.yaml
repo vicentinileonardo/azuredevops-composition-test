@@ -6,7 +6,7 @@ metadata:
     krateo.io/connector-verbose: "{{ .Values.teamProject.verbose | default "false" }}"
 spec:
   connectorConfigRef:
-    namespace: krateo-system
+    namespace: default
     name: connectorconfig-sample
 
   organization: {{ .Values.azureDevOps.organization }}

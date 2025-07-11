@@ -67,7 +67,6 @@ apiVersion: azuredevops.krateo.io/v1alpha1
 kind: ConnectorConfig
 metadata:
   name: connectorconfig-sample
-  namespace: azuredevops-system
 spec:
   apiUrl: https://dev.azure.com # DEPRECATED - use apiUrls instead
   apiVersionConfig:
