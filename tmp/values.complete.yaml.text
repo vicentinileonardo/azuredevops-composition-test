@@ -2,25 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# Azure DevOps Configuration
-azureDevOps:
-  # @param {string} organization - Replace with your Azure DevOps organization name
-  organization: "krateo-kog"
-  patSecretRef: # not currently used
-    # @param {string} patSecretRef.name - Name of the Kubernetes secret containing the PAT
-    name: "azuredevops-secret"
-    # @param {string} patSecretRef.namespace - Namespace of the Kubernetes secret
-    namespace: "default"
-
-# Team Project Configuration
-teamProject:
-  # @param {string} teamProject.name - Name of the Azure DevOps Team Project
-  name: "krateo-project-from-composition"
-  # @param {string} teamProject.description - Description for the Azure DevOps Team Project
-  description: "Created by Krateo Composition"
-  # @param {boolean} teamProject.verbose - Enable verbose logging
-  verbose: true # Enable verbose logging
-
 
 
 
@@ -35,17 +16,14 @@ gitRepository:
   # @param {string} gitRepository.name - Name of the Azure DevOps Git Repository
   name: "krateo-repo-from-composition"
 
+  # @param {string} gitRepository.api-version - Version of the API to use
+  api-version: "7.2-preview.2"  # Version of the API to use
 
 
 
 
 
 
-
-# Environment Configuration
-environment:
-  # @param {string} environment.name - Name of the Azure DevOps Environment
-  name: "krateo-env-from-composition"
 
 # Pipeline Configuration
 pipeline:

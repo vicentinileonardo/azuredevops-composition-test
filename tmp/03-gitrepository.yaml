@@ -1,14 +1,15 @@
-apiVersion: azuredevops.krateo.io/v1alpha1
-kind: Repo
+apiVersion: azuredevops.kog.krateo.io/v1alpha1
+kind: GitRepository
 metadata:
   name: {{ .Values.gitRepository.name | lower }}
+  annotations:
+    krateo.io/connector-verbose: "{{ .Values.teamProject.verbose | default "false" }}"
 spec:
-  authenticationRef:
-    name: {{ .Values.azureDevOps.patSecretRef.name }}
-    namespace: {{ .Values.azureDevOps.patSecretRef.namespace }}
-  organization: {{ .Values.azureDevOps.organization }}
-  project: {{ .Values.teamProject.name }}
-  name: {{ .Values.gitRepository.name }}
-  templateRepo:
-    url: {{ .Values.gitRepository.templateRepoUrl }}
-    branch: {{ .Values.gitRepository.templateRepoBranch }}
+  authenticationRefs:
+    basicAuthRef: azure-devops-basic-auth
+  
+  api-version: {{ .Values.gitRepository.api-version | default "7.2-preview.2" }}
+  organization: {{ .Values.azureDevOps.organization | lower }}
+  projectId: {{ .Values.teamProject.name | lower }}
+
+  name: {{ .Values.gitRepository.name | lower }}

@@ -19,6 +19,23 @@
       "title": "azureDevOps",
       "type": "object"
     },
+    "environment": {
+      "additionalProperties": false,
+      "description": "Environment Configuration",
+      "properties": {
+        "name": {
+          "default": "krateo-env-from-composition",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "environment",
+      "type": "object"
+    },
     "global": {
       "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
       "required": [],
@@ -59,7 +76,8 @@
   },
   "required": [
     "azureDevOps",
-    "teamProject"
+    "teamProject",
+    "environment"
   ],
   "type": "object"
 }

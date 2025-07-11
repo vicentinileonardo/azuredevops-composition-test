@@ -1,0 +1,26 @@
+apiVersion: composition.krateo.io/v0-0-1
+kind: AzuredevopsCompositionExample
+metadata:
+  labels:
+    krateo.io/composition-version: v0-0-1
+  name: azuredevops-composition-example
+  namespace: azuredevops-example
+spec:
+  # Azure DevOps Configuration
+  azureDevOps:
+    # @param {string} organization - Replace with your Azure DevOps organization name
+    organization: "krateo-kog"
+    
+  # Team Project Configuration
+  teamProject:
+    # @param {string} teamProject.name - Name of the Azure DevOps Team Project
+    name: "krateo-project-from-composition"
+    # @param {string} teamProject.description - Description for the Azure DevOps Team Project
+    description: "Created by Krateo Composition"
+    # @param {boolean} teamProject.verbose - Enable verbose logging
+    verbose: true # Enable verbose logging
+
+  # Environment Configuration
+  environment:
+    # @param {string} environment.name - Name of the Azure DevOps Environment
+    name: "krateo-env-from-composition"

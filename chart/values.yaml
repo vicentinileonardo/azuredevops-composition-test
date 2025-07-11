@@ -15,3 +15,10 @@ teamProject:
   description: "Created by Krateo Composition"
   # @param {boolean} teamProject.verbose - Enable verbose logging
   verbose: true # Enable verbose logging
+
+# Environment Configuration
+environment:
+  # @param {string} environment.name - Name of the Azure DevOps Environment
+  name: "krateo-env-from-composition"
+
+
