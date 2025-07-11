@@ -1,0 +1,15 @@
+apiVersion: azuredevops.krateo.io/v1alpha1
+kind: Pipeline
+metadata:
+  name: {{ .Values.pipeline.name | lower }}
+spec:
+  authenticationRef:
+    name: {{ .Values.azureDevOps.patSecretRef.name }}
+    namespace: {{ .Values.azureDevOps.patSecretRef.namespace }}
+  organization: {{ .Values.azureDevOps.organization }}
+  project: {{ .Values.teamProject.name }}
+  name: {{ .Values.pipeline.name }}
+  repository:
+    name: {{ .Values.gitRepository.name }}
+    path: {{ .Values.pipeline.path }}
+  yamlFileName: {{ .Values.pipeline.yamlFileName }}

@@ -1,0 +1,11 @@
+apiVersion: azuredevops.krateo.io/v1alpha1
+kind: Environment
+metadata:
+  name: {{ .Values.environment.name | lower }}
+spec:
+  authenticationRef:
+    name: azure-devops-basic-auth
+    namespace: krateo-system
+  organization: {{ .Values.azureDevOps.organization }}
+  project: {{ .Values.teamProject.name }}
+  name: {{ .Values.environment.name }}

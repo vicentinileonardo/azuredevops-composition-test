@@ -1,0 +1,65 @@
+# Default values for krateo-composition-azuredevops-project.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Azure DevOps Configuration
+azureDevOps:
+  # @param {string} organization - Replace with your Azure DevOps organization name
+  organization: "krateo-kog"
+  patSecretRef: # not currently used
+    # @param {string} patSecretRef.name - Name of the Kubernetes secret containing the PAT
+    name: "azuredevops-secret"
+    # @param {string} patSecretRef.namespace - Namespace of the Kubernetes secret
+    namespace: "default"
+
+# Team Project Configuration
+teamProject:
+  # @param {string} teamProject.name - Name of the Azure DevOps Team Project
+  name: "krateo-project-from-composition"
+  # @param {string} teamProject.description - Description for the Azure DevOps Team Project
+  description: "Created by Krateo Composition"
+  # @param {boolean} teamProject.verbose - Enable verbose logging
+  verbose: true # Enable verbose logging
+
+
+
+
+
+
+
+
+
+
+# Git Repository Configuration
+gitRepository:
+  # @param {string} gitRepository.name - Name of the Azure DevOps Git Repository
+  name: "krateo-repo-from-composition"
+
+
+
+
+
+
+
+
+# Environment Configuration
+environment:
+  # @param {string} environment.name - Name of the Azure DevOps Environment
+  name: "krateo-env-from-composition"
+
+# Pipeline Configuration
+pipeline:
+  # @param {string} pipeline.name - Name of the Azure DevOps Pipeline
+  name: "krateo-pipeline-from-composition"
+  # @param {string} pipeline.path - Path to the pipeline YAML file in the repository
+  path: "/"
+  # @param {string} pipeline.yamlFileName - Name of the pipeline YAML file
+  yamlFileName: "azure-pipelines.yaml"
+
+# Pipeline Permission Configuration
+pipelinePermission:
+  # @param {string} pipelinePermission.resourceType - Type of resource to grant permission to (e.g., "environment", "queue")
+  resourceType: "environment"
+  
+  # resourceId will be dynamically looked up from the created environment
+  # pipelineId will be dynamically looked up from the created pipeline

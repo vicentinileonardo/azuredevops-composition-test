@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "azureDevOps": {
+      "additionalProperties": false,
+      "description": "Azure DevOps Configuration",
+      "properties": {
+        "organization": {
+          "default": "krateo-kog",
+          "required": [],
+          "title": "organization",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization"
+      ],
+      "title": "azureDevOps",
+      "type": "object"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "teamProject": {
+      "additionalProperties": false,
+      "description": "Team Project Configuration",
+      "properties": {
+        "description": {
+          "default": "Created by Krateo Composition",
+          "required": [],
+          "title": "description",
+          "type": "string"
+        },
+        "name": {
+          "default": "krateo-project-from-composition",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "verbose": {
+          "default": true,
+          "required": [],
+          "title": "verbose",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "verbose"
+      ],
+      "title": "teamProject",
+      "type": "object"
+    }
+  },
+  "required": [
+    "azureDevOps",
+    "teamProject"
+  ],
+  "type": "object"
+}

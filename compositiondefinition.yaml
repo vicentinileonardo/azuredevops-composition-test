@@ -1,0 +1,10 @@
+apiVersion: core.krateo.io/v1alpha1
+kind: CompositionDefinition
+metadata:
+  name: azuredevops-composition-example
+  namespace: azuredevops-example
+spec:
+  chart:
+    repo: azuredevops-composition-example
+    url: https://leonardovicentini.com/helm-charts/charts
+    version: 0.1.0

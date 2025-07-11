@@ -1,0 +1,21 @@
+apiVersion: azuredevops.krateo.io/v1alpha1
+kind: TeamProject
+metadata:
+  name: {{ .Values.teamProject.name | lower }}
+  annotations:
+    krateo.io/connector-verbose: "{{ .Values.teamProject.verbose | default "false" }}"
+spec:
+  connectorConfigRef:
+    namespace: krateo-system
+    name: connectorconfig-sample
+
+  organization: {{ .Values.azureDevOps.organization }}
+  name: {{ .Values.teamProject.name }}
+  description: {{ .Values.teamProject.description }}
+  
+  visibility: private
+  capabilities:
+    versioncontrol:
+      sourceControlType: Git
+    processTemplate:
+      templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
