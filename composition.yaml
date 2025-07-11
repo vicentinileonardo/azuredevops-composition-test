@@ -24,3 +24,7 @@ spec:
   environment:
     # @param {string} environment.name - Name of the Azure DevOps Environment
     name: "krateo-env-from-composition"
+    
+    description: "Created by Krateo Composition"
+
+

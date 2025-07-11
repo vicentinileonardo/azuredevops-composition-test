@@ -23,6 +23,12 @@
       "additionalProperties": false,
       "description": "Environment Configuration",
       "properties": {
+        "description": {
+          "default": "Created by Krateo Composition",
+          "required": [],
+          "title": "description",
+          "type": "string"
+        },
         "name": {
           "default": "krateo-env-from-composition",
           "required": [],
@@ -31,7 +37,8 @@
         }
       },
       "required": [
-        "name"
+        "name",
+        "description"
       ],
       "title": "environment",
       "type": "object"

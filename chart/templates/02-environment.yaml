@@ -9,7 +9,8 @@ spec:
     namespace: default
     name: connectorconfig-sample
 
-  organization: {{ .Values.azureDevOps.organization }}
   projectRef:
     name: {{ .Values.teamProject.name | lower }}
+    namespace: default
   name: {{ .Values.environment.name }}
+  description: {{ .Values.environment.description | default "Created by Krateo Composition" }}
