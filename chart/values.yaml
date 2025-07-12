@@ -48,13 +48,13 @@ pipeline:
   name: pipeline-from-composition
   # @param {string} folder Folder where the pipeline will be created
   folder: "test-folder-kog"                      
-  # @param {object} configuration Configuration for the pipeline
+  # @param {object} [configuration] Configuration for the pipeline
   configuration:
-    # @param {string} path Path to the pipeline YAML file within the repository
+    # @param {string} [path] Path to the pipeline YAML file within the repository
     path: azure-pipelines.yml
-    # @param {object} repository Repository configuration for the pipeline
+    # @param {object} [repository] Repository configuration for the pipeline
     repository: 
-      # @param {string} type Type of the repository, e.g., gitHub, azureReposGit, etc.
+      # @param {string} [type] Type of the repository, e.g., gitHub, azureReposGit, etc.
       type: azureReposGit
-    # @param {string} type Type of the pipeline configuration, e.g., yaml, designer, etc.
+    # @param {string} [type] Type of the pipeline configuration, e.g., yaml, designer, etc.
     type: yaml

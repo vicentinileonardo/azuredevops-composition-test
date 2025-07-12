@@ -153,8 +153,7 @@
       "required": [
         "apiVersion",
         "name",
-        "folder",
-        "configuration"
+        "folder"
       ],
       "properties": {
         "verbose": {
@@ -188,11 +187,7 @@
         "configuration": {
           "type": "object",
           "title": "Configuration for the pipeline",
-          "required": [
-            "path",
-            "repository",
-            "type"
-          ],
+          "required": [],
           "properties": {
             "path": {
               "type": [
@@ -204,9 +199,7 @@
             "repository": {
               "type": "object",
               "title": "Repository configuration for the pipeline",
-              "required": [
-                "type"
-              ],
+              "required": [],
               "properties": {
                 "type": {
                   "type": [

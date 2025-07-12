@@ -31,7 +31,3 @@ spec:
     apiVersion: "7.2-preview.1"
     name: "pipeline-from-composition"
     folder: "test-folder-kog"
-    configuration:
-      path: azure-pipelines.yml
-      repository:
-        type: "azureReposGit"
