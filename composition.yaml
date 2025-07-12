@@ -22,6 +22,6 @@ spec:
   gitRepository:
     verbose: true
     name: "krateo-repo-from-composition"
-    api-version: "7.2-preview.2"
+    apiVersion: "7.2-preview.2"
     initialize: true
     deafultBranch: "refs/heads/test-branch"
