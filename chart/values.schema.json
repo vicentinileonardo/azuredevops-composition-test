@@ -34,9 +34,16 @@
           "required": [],
           "title": "name",
           "type": "string"
+        },
+        "verbose": {
+          "default": true,
+          "required": [],
+          "title": "verbose",
+          "type": "boolean"
         }
       },
       "required": [
+        "verbose",
         "name",
         "description"
       ],
@@ -65,17 +72,38 @@
           "title": "name",
           "type": "string"
         },
+        "sourceControlType": {
+          "default": "Git",
+          "required": [],
+          "title": "sourceControlType",
+          "type": "string"
+        },
+        "templateTypeId": {
+          "default": "6b724908-ef14-45cf-84f8-768b5384da45",
+          "required": [],
+          "title": "templateTypeId",
+          "type": "string"
+        },
         "verbose": {
           "default": true,
           "required": [],
           "title": "verbose",
           "type": "boolean"
+        },
+        "visibility": {
+          "default": "private",
+          "required": [],
+          "title": "visibility",
+          "type": "string"
         }
       },
       "required": [
+        "verbose",
         "name",
         "description",
-        "verbose"
+        "visibility",
+        "sourceControlType",
+        "templateTypeId"
       ],
       "title": "teamProject",
       "type": "object"

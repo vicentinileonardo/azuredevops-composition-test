@@ -11,6 +11,10 @@
 
 
 
+
+
+
+
 # Git Repository Configuration
 gitRepository:
   # @param {string} gitRepository.name - Name of the Azure DevOps Git Repository
@@ -18,11 +22,6 @@ gitRepository:
 
   # @param {string} gitRepository.api-version - Version of the API to use
   api-version: "7.2-preview.2"  # Version of the API to use
-
-
-
-
-
 
 
 # Pipeline Configuration

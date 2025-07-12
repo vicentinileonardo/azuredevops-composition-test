@@ -1,15 +1,18 @@
 apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: GitRepository
 metadata:
-  name: {{ .Values.gitRepository.name | lower }}
+  name: test-gitrepository-kog-1-2
+  namespace: adp
   annotations:
-    krateo.io/connector-verbose: "{{ .Values.teamProject.verbose | default "false" }}"
+    krateo.io/connector-verbose: {{ .Values.gitRepository.verbose | default "false" }}
 spec:
   authenticationRefs:
     basicAuthRef: azure-devops-basic-auth
-  
+
   api-version: {{ .Values.gitRepository.api-version | default "7.2-preview.2" }}
   organization: {{ .Values.azureDevOps.organization | lower }}
   projectId: {{ .Values.teamProject.name | lower }}
 
   name: {{ .Values.gitRepository.name | lower }}
+  initialize: true
+  deafultBranch: "refs/heads/test-branch"

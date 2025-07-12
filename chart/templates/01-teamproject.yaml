@@ -13,9 +13,9 @@ spec:
   name: {{ .Values.teamProject.name }}
   description: {{ .Values.teamProject.description }}
   
-  visibility: private
+  visibility: {{ .Values.teamProject.visibility | default "private" }}
   capabilities:
     versioncontrol:
-      sourceControlType: Git
+      sourceControlType: {{ .Values.teamProject.sourceControlType | default "Git" }}
     processTemplate:
-      templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
+      templateTypeId: {{ .Values.teamProject.templateTypeId | default "6b724908-ef14-45cf-84f8-768b5384da45" }}
