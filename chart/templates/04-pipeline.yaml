@@ -1,10 +1,5 @@
-{{- $gitRepository := lookup "azuredevops.kog.krateo.io/v1alpha1" "Repository" .Release.Namespace .Values.gitRepository.name }}
-{{- $gitRepositoryId := "" }}
-{{- if $gitRepository }}
-{{- $gitRepositoryId = $gitRepository.status.id }}
-{{- end }}
-
-{{- if $gitRepositoryId }}
+{{- $gitRepository := lookup "azuredevops.kog.krateo.io/v1alpha1" "GitRepository" .Release.Namespace (.Values.gitRepository.name | lower) }}
+{{- if and $gitRepository $gitRepository.status.id }}
 apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: Pipeline
 metadata:
@@ -22,7 +17,7 @@ spec:
   configuration:
     path: {{ .Values.pipeline.configuration.path }}
     repository: 
-      id: {{ $gitRepositoryId }}   # Dynamically retrieved repository ID
+      id: {{ $gitRepositoryId.status.id }}
       type: {{ .Values.pipeline.configuration.repository.type }}
     type: {{ .Values.pipeline.configuration.type }}
 
