@@ -31,9 +31,7 @@
       "required": [
         "name",
         "namespace",
-        "description",
-        "visibility",
-        "capabilities"
+        "visibility"
       ],
       "properties": {
         "verbose": {
@@ -70,48 +68,6 @@
           ],
           "title": "Visibility of the Azure DevOps Team Project",
           "default": "private"
-        },
-        "capabilities": {
-          "type": "object",
-          "title": "Capabilities for the Azure DevOps Team Project",
-          "required": [
-            "versioncontrol",
-            "processTemplate"
-          ],
-          "properties": {
-            "versioncontrol": {
-              "type": "object",
-              "title": "Version control configuration for the Azure DevOps Team Project",
-              "required": [
-                "sourceControlType"
-              ],
-              "properties": {
-                "sourceControlType": {
-                  "type": [
-                    "string"
-                  ],
-                  "title": "Source control type for the Azure DevOps Team Project",
-                  "default": "\"Git\""
-                }
-              }
-            },
-            "processTemplate": {
-              "type": "object",
-              "title": "Process template configuration for the Azure DevOps Team Project",
-              "required": [
-                "templateTypeId"
-              ],
-              "properties": {
-                "templateTypeId": {
-                  "type": [
-                    "string"
-                  ],
-                  "title": "Template type ID for the Azure DevOps Team Project",
-                  "default": "6b724908-ef14-45cf-84f8-768b5384da45"
-                }
-              }
-            }
-          }
         }
       }
     },

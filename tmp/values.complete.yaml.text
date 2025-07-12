@@ -2,7 +2,20 @@
 
 
 
+  # @param {object} capabilities Capabilities for the Azure DevOps Team Project
+  capabilities:
+    # @param {object} versioncontrol Version control configuration for the Azure DevOps Team Project
+    versioncontrol:
+      # @param {string} sourceControlType Source control type for the Azure DevOps Team Project
+      sourceControlType: "Git"
+    # @param {object} processTemplate Process template configuration for the Azure DevOps Team Project
+    processTemplate:
+      # @param {string} templateTypeId Template type ID for the Azure DevOps Team Project
+      templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
 
+
+
+      
 
 
 # Pipeline Permission Configuration

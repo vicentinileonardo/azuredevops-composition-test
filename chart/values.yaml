@@ -11,20 +11,10 @@ teamProject:
   name: "project-from-composition"
   # @param {string} namespace Namespace for the Azure DevOps Team Project
   namespace: "default"
-  # @param {string} description Description for the Azure DevOps Team Project
+  # @param {string} [description] Description for the Azure DevOps Team Project
   description: "Created by Krateo Composition"
   # @param {string} visibility Visibility of the Azure DevOps Team Project
   visibility: private
-  # @param {object} capabilities Capabilities for the Azure DevOps Team Project
-  capabilities:
-    # @param {object} versioncontrol Version control configuration for the Azure DevOps Team Project
-    versioncontrol:
-      # @param {string} sourceControlType Source control type for the Azure DevOps Team Project
-      sourceControlType: "Git"
-    # @param {object} processTemplate Process template configuration for the Azure DevOps Team Project
-    processTemplate:
-      # @param {string} templateTypeId Template type ID for the Azure DevOps Team Project
-      templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
 
 # @param {object} environment Environment configuration
 environment:
