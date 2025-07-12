@@ -51,12 +51,6 @@ stringData:
 EOF
 ```
 
-### Create the azuredevops-system namespace
-
-```sh
-kubectl create ns azuredevops-system
-```
-
 ### Set up `ConnectorConfig` for Azure DevOps Provider (classic)
 
 After creating the secret, you can reference it from the resource `ConnectorConfig` which is used to configure the Azure DevOps provider (classic): 
@@ -94,6 +88,12 @@ done
 kubectl wait deployments azuredevops-provider-kog-pipelinepermission-controller --for condition=Available=True --namespace krateo-system --timeout=300s
 ```
 
+### Create the azuredevops-system namespace
+
+```sh
+kubectl create ns azuredevops-example
+```
+
 ### Set up `BasicAuth` for Azure DevOps Provider KOG
 
 ```sh
@@ -102,7 +102,7 @@ apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: BasicAuth
 metadata:
   name: azure-devops-basic-auth
-  namespace: azuredevops-system
+  namespace: azuredevops-example
 spec:
   username: "anything"  # Any value as official Azure DevOps OAS suggests (field not used)
   passwordRef:

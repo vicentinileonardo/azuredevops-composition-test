@@ -17,7 +17,7 @@ teamProject:
   description: "Created by Krateo Composition"
   # @param {string} visibility - Visibility of the Azure DevOps Team Project
   visibility: private
-  # @param {object} sourceControlType - Source control type for the Azure DevOps Team Project
+  # @param {string} sourceControlType - Source control type for the Azure DevOps Team Project
   sourceControlType: "Git"
   # @param {string} templateTypeId - Template type ID for the Azure DevOps Team Project
   templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
