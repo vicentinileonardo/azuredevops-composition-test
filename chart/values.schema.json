@@ -117,7 +117,7 @@
       "description": "Git Repository Configuration",
       "required": [
         "name",
-        "api-version"
+        "apiVersion"
       ],
       "properties": {
         "verbose": {
@@ -135,7 +135,7 @@
           "title": "Name of the Azure DevOps Git Repository",
           "default": "\"krateo-repo-from-composition\""
         },
-        "api-version": {
+        "apiVersion": {
           "type": [
             "string"
           ],

@@ -38,7 +38,7 @@ gitRepository:
   # @param {string} name - Name of the Azure DevOps Git Repository
   name: "krateo-repo-from-composition"
   # @param {string} api-version - Version of the API to use
-  api-version: "7.2-preview.2"
+  apiVersion: "7.2-preview.2"
   # @param {boolean} [initialize] - Whether to initialize the repository
   initialize: true
   # @param {string} [deafultBranch] - Default branch for the Git Repository
