@@ -14,4 +14,4 @@ spec:
 
   name: {{ .Values.gitRepository.name | lower }}
   initialize: {{ .Values.gitRepository.initialize | default true }}
-  deafultBranch: {{ .Values.gitRepository.deafultBranch | default "refs/heads/main" }}
+  defaultBranch: {{ .Values.gitRepository.defaultBranch | default "refs/heads/main" }}

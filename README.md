@@ -125,6 +125,9 @@ kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops
 
 #Check the status of the resources created by the composition:
 
+kubectl wait teamproject krateo-project-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+kubectl wait environment krateo-environment-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-git-repository-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 
 
 
