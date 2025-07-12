@@ -1,0 +1,31 @@
+{{- $environment := lookup "azuredevops.kog.krateo.io/v1alpha1" "Environment" .Release.Namespace (.Values.environment.name | lower) }}
+{{- if and $environment $environment.status.id }}
+
+{{- $pipeline := lookup "azuredevops.kog.krateo.io/v1alpha1" "Pipeline" .Release.Namespace (.Values.pipeline.name | lower) }}
+{{- if and $pipeline $pipeline.status.id }}
+
+apiVersion: azuredevops.kog.krateo.io/v1alpha1
+kind: PipelinePermission
+metadata:
+  name: {{ .Values.pipelinePermission.name | lower }}
+  annotations:
+    krateo.io/connector-verbose: "{{ .Values.pipelinepermission.verbose }}"
+spec:
+  authenticationRefs:
+    basicAuthRef: azure-devops-basic-auth
+  
+  api-version: {{ .Values.pipelinepermission.apiVersion }}
+  organization: {{ .Values.azureDevOps.organization }}
+  project: {{ .Values.teamProject.name }}
+  
+  resourceType: "environment" 
+  resourceId: {{ $environment.status.id }}
+
+  allPipelines:
+    authorized: {{ .Values.pipelinePermission.allPipelines.authorized }}
+
+  pipelines:
+    - id: {{ $pipeline.status.id }}
+
+{{- end }}
+{{- end }}

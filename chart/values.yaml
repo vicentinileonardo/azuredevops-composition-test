@@ -58,3 +58,16 @@ pipeline:
       type: azureReposGit
     # @param {string} [type] Type of the pipeline configuration, e.g., yaml, designer, etc.
     type: yaml
+
+# @param {object} pipelinePermission PipelinePermission configuration
+pipelinepermission:
+  # @param {boolean} [verbose] Enable verbose logging
+  verbose: true
+  # @param {string} name Name of the Azure DevOps PipelinePermission
+  name: pipelinepermission-from-composition
+  # @param {string} api-version Version of the API to use
+  apiVersion: "7.2-preview.1"
+  # @param {object} [allPipelines] Whether to authorize all pipelines
+  allPipelines:
+    # @param {boolean} [authorized] Whether to authorize all pipelines
+    authorized: false

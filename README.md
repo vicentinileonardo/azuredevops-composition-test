@@ -9,10 +9,11 @@ This Composition implements the following steps:
 1.  **Creates an Azure DevOps Team Project**: A new Team Project is provisioned in your specified Azure DevOps organization, managed by the Azure DevOps Provider (classic).
 2.  **Creates an Azure DevOps Environment**: An Environment is created within the new Team Project, managed by the Azure DevOps Provider (classic).
 3.  **Creates an Azure DevOps Git Repository**: A Git Repository is created within the newly created Team Project, managed by the Azure DevOps Provider KOG.
+4.  **Creates an Azure DevOps Pipeline**: A Pipeline is created in the Azure DevOps organization, which is associated with the Git Repository created in the previous step, managed by the Azure DevOps Provider KOG.
 
 ---
 TODO
-4.  **Creates an Azure DevOps Pipeline**: 
+
 5.  **Grants Pipeline Permissions**: Permissions are granted for the created Pipeline to access the created Environment. This crucial step leverages the Azure DevOps Provider KOG, dynamically looking up the IDs of the Environment and Pipeline created by the classic provider.
 
 ## Requirements
@@ -112,18 +113,41 @@ spec:
 EOF
 ```
 
+
+### Apply the Composition Definition
 ```sh
-# Apply the Composition Definition
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/compositiondefinition.yaml
 
 # Wait for the Composition Definition to be Ready=True
 kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-
-# Apply the Composition
-kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
-
-# Wait for the resources created by the Composition to be ready
-kubectl wait teamproject krateo-project-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-kubectl wait environment krateo-env-from-composition --for condition=Ready=True --timeout=300s
-kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 ```
+
+### Apply the Composition
+```sh
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
+```
+
+### Wait for the resources created by the Composition to be ready
+```sh
+kubectl wait teamprojects.azuredevops.krateo.io krateo-project-from-composition --for condition=Ready=True --timeout=300s
+kubectl wait environments.azuredevops.krateo.io krateo-env-from-composition --for condition=Ready=True --timeout=300s
+kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+
+# Pipeline resource is not immediately available after creation, since it needs the the ID of the GitRepository
+# Therefore it will be created after the GitRepository is ready and the `status.id` field is populated.
+until kubectl get pipelines.azuredevops.kog.krateo.io pipeline-from-composition -n azuredevops-example &>/dev/null; do
+  echo "Waiting for Pipeline resource to be created..."
+  sleep 5
+done
+kubectl wait pipelines.azuredevops.kog.krateo.io pipeline-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+
+
+until kubectl get pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition -n azuredevops-example &>/dev/null; do
+  echo "Waiting for PipelinePermission resource to be created..."
+  sleep 5
+done
+kubectl wait pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+
+```
+
+

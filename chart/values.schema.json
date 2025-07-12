@@ -6,7 +6,8 @@
     "teamProject",
     "environment",
     "gitRepository",
-    "pipeline"
+    "pipeline",
+    "pipelinepermission"
   ],
   "properties": {
     "azureDevOps": {
@@ -216,6 +217,51 @@
               ],
               "title": "Type of the pipeline configuration, e.g., yaml, designer, etc.",
               "default": "yaml"
+            }
+          }
+        }
+      }
+    },
+    "pipelinepermission": {
+      "type": "object",
+      "title": "PipelinePermission configuration",
+      "required": [
+        "name",
+        "apiVersion"
+      ],
+      "properties": {
+        "verbose": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Enable verbose logging",
+          "default": "true"
+        },
+        "name": {
+          "type": [
+            "string"
+          ],
+          "title": "Name of the Azure DevOps PipelinePermission",
+          "default": "pipelinepermission-from-composition"
+        },
+        "apiVersion": {
+          "type": [
+            "string"
+          ],
+          "title": "Version of the API to use",
+          "default": "\"7.2-preview.1\""
+        },
+        "allPipelines": {
+          "type": "object",
+          "title": "Whether to authorize all pipelines",
+          "required": [],
+          "properties": {
+            "authorized": {
+              "type": [
+                "boolean"
+              ],
+              "title": "Whether to authorize all pipelines",
+              "default": "false"
             }
           }
         }
