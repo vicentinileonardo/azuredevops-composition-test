@@ -3,7 +3,7 @@ kind: GitRepository
 metadata:
   name: {{ .Values.gitRepository.name | lower }}
   annotations:
-    krateo.io/connector-verbose: {{ .Values.gitRepository.verbose | default "false" }}
+    krateo.io/connector-verbose: "{{ .Values.gitRepository.verbose }}"
 spec:
   authenticationRefs:
     basicAuthRef: azure-devops-basic-auth

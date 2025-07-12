@@ -7,11 +7,11 @@ It demonstrates the seamless integration of resources managed by both the Azure 
 
 This Composition implements the following steps:
 1.  **Creates an Azure DevOps Team Project**: A new Team Project is provisioned in your specified Azure DevOps organization, managed by the Azure DevOps Provider (classic).
+2.  **Creates an Azure DevOps Environment**: An Environment is created within the new Team Project, managed by the Azure DevOps Provider (classic).
+3.  **Creates an Azure DevOps Git Repository**: A Git Repository is created within the newly created Team Project, managed by the Azure DevOps Provider KOG.
 
 ---
 TODO
-2.  **Creates an Azure DevOps Environment**: An Environment is created within the new Team Project, managed by the Azure DevOps Provider (classic).
-3.  **Creates an Azure DevOps Git Repository**: 
 4.  **Creates an Azure DevOps Pipeline**: 
 5.  **Grants Pipeline Permissions**: Permissions are granted for the created Pipeline to access the created Environment. This crucial step leverages the Azure DevOps Provider KOG, dynamically looking up the IDs of the Environment and Pipeline created by the classic provider.
 
@@ -115,5 +115,21 @@ EOF
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/compositiondefinition.yaml
 
+# wait for the composition definition to be ready true
+kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
 ```
+
+
+Check the status of the composition:
+```sh
+kubectl get azuredevopscompositionexample.composition.krateo.io/azuredevops-composition-example -n azuredevops-example
+```
+
+wait for the composition to be ready:
+```sh
+kubectl wait azuredevopscompositionexample.composition.krateo.io/azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+
+Check the status of the resources created by the composition:
+```sh

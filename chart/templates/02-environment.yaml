@@ -3,7 +3,7 @@ kind: Environment
 metadata:
   name: {{ .Values.environment.name | lower }}
   annotations:
-    krateo.io/connector-verbose: "{{ .Values.environment.verbose | default "false" }}"
+    krateo.io/connector-verbose: "{{ .Values.environment.verbose }}"
 spec:
   connectorConfigRef:
     namespace: default

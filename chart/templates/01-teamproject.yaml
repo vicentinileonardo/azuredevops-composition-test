@@ -3,7 +3,7 @@ kind: TeamProject
 metadata:
   name: {{ .Values.teamProject.name | lower }}
   annotations:
-    krateo.io/connector-verbose: "{{ .Values.teamProject.verbose | default "false" }}"
+    krateo.io/connector-verbose: "{{ .Values.teamProject.verbose }}"
 spec:
   connectorConfigRef:
     namespace: default
