@@ -1,8 +1,7 @@
 apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: GitRepository
 metadata:
-  name: test-gitrepository-kog-1-2
-  namespace: adp
+  name: {{ .Values.gitRepository.name | lower }}
   annotations:
     krateo.io/connector-verbose: {{ .Values.gitRepository.verbose | default "false" }}
 spec:
@@ -14,5 +13,5 @@ spec:
   projectId: {{ .Values.teamProject.name | lower }}
 
   name: {{ .Values.gitRepository.name | lower }}
-  initialize: true
-  deafultBranch: "refs/heads/test-branch"
+  initialize: {{ .Values.gitRepository.initialize | default true }}
+  deafultBranch: {{ .Values.gitRepository.deafultBranch | default "refs/heads/main" }}

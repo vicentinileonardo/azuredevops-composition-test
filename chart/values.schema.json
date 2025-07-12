@@ -1,118 +1,162 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "additionalProperties": false,
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "required": [
+    "azureDevOps",
+    "teamProject",
+    "environment",
+    "gitRepository"
+  ],
   "properties": {
     "azureDevOps": {
-      "additionalProperties": false,
+      "type": "object",
       "description": "Azure DevOps Configuration",
-      "properties": {
-        "organization": {
-          "default": "krateo-kog",
-          "required": [],
-          "title": "organization",
-          "type": "string"
-        }
-      },
       "required": [
         "organization"
       ],
-      "title": "azureDevOps",
-      "type": "object"
-    },
-    "environment": {
-      "additionalProperties": false,
-      "description": "Environment Configuration",
       "properties": {
-        "description": {
-          "default": "Created by Krateo Composition",
-          "required": [],
-          "title": "description",
-          "type": "string"
-        },
-        "name": {
-          "default": "krateo-env-from-composition",
-          "required": [],
-          "title": "name",
-          "type": "string"
-        },
-        "verbose": {
-          "default": true,
-          "required": [],
-          "title": "verbose",
-          "type": "boolean"
+        "organization": {
+          "type": [
+            "string"
+          ],
+          "title": "Replace with your Azure DevOps organization name",
+          "default": "\"krateo-kog\""
         }
-      },
-      "required": [
-        "verbose",
-        "name",
-        "description"
-      ],
-      "title": "environment",
-      "type": "object"
-    },
-    "global": {
-      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
-      "required": [],
-      "title": "global",
-      "type": "object"
+      }
     },
     "teamProject": {
-      "additionalProperties": false,
+      "type": "object",
       "description": "Team Project Configuration",
-      "properties": {
-        "description": {
-          "default": "Created by Krateo Composition",
-          "required": [],
-          "title": "description",
-          "type": "string"
-        },
-        "name": {
-          "default": "krateo-project-from-composition",
-          "required": [],
-          "title": "name",
-          "type": "string"
-        },
-        "sourceControlType": {
-          "default": "Git",
-          "required": [],
-          "title": "sourceControlType",
-          "type": "string"
-        },
-        "templateTypeId": {
-          "default": "6b724908-ef14-45cf-84f8-768b5384da45",
-          "required": [],
-          "title": "templateTypeId",
-          "type": "string"
-        },
-        "verbose": {
-          "default": true,
-          "required": [],
-          "title": "verbose",
-          "type": "boolean"
-        },
-        "visibility": {
-          "default": "private",
-          "required": [],
-          "title": "visibility",
-          "type": "string"
-        }
-      },
       "required": [
-        "verbose",
         "name",
         "description",
         "visibility",
         "sourceControlType",
         "templateTypeId"
       ],
-      "title": "teamProject",
-      "type": "object"
+      "properties": {
+        "verbose": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Enable verbose logging",
+          "description": "Team Project Configuration",
+          "default": "true"
+        },
+        "name": {
+          "type": [
+            "string"
+          ],
+          "title": "Name of the Azure DevOps Team Project",
+          "default": "\"krateo-project-from-composition\""
+        },
+        "description": {
+          "type": [
+            "string"
+          ],
+          "title": "Description for the Azure DevOps Team Project",
+          "default": "\"Created by Krateo Composition\""
+        },
+        "visibility": {
+          "type": [
+            "string"
+          ],
+          "title": "Visibility of the Azure DevOps Team Project",
+          "default": "private"
+        },
+        "sourceControlType": {
+          "type": [
+            "object"
+          ],
+          "title": "Source control type for the Azure DevOps Team Project",
+          "default": "\"Git\""
+        },
+        "templateTypeId": {
+          "type": [
+            "string"
+          ],
+          "title": "Template type ID for the Azure DevOps Team Project",
+          "default": "6b724908-ef14-45cf-84f8-768b5384da45"
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "description": "Environment Configuration",
+      "required": [
+        "name",
+        "description"
+      ],
+      "properties": {
+        "verbose": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Enable verbose logging",
+          "description": "Environment Configuration",
+          "default": "true"
+        },
+        "name": {
+          "type": [
+            "string"
+          ],
+          "title": "Name of the Azure DevOps Environment",
+          "default": "\"krateo-env-from-composition\""
+        },
+        "description": {
+          "type": [
+            "string"
+          ],
+          "title": "Description for the Azure DevOps Environment",
+          "default": "\"Created by Krateo Composition\""
+        }
+      }
+    },
+    "gitRepository": {
+      "type": "object",
+      "description": "Git Repository Configuration",
+      "required": [
+        "name",
+        "api-version"
+      ],
+      "properties": {
+        "verbose": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Enable verbose logging",
+          "description": "Git Repository Configuration",
+          "default": "true"
+        },
+        "name": {
+          "type": [
+            "string"
+          ],
+          "title": "Name of the Azure DevOps Git Repository",
+          "default": "\"krateo-repo-from-composition\""
+        },
+        "api-version": {
+          "type": [
+            "string"
+          ],
+          "title": "Version of the API to use",
+          "default": "\"7.2-preview.2\""
+        },
+        "initialize": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Whether to initialize the repository",
+          "default": "true"
+        },
+        "deafultBranch": {
+          "type": [
+            "string"
+          ],
+          "title": "Default branch for the Git Repository",
+          "default": "\"refs/heads/main\""
+        }
+      }
     }
-  },
-  "required": [
-    "azureDevOps",
-    "teamProject",
-    "environment"
-  ],
-  "type": "object"
+  }
 }

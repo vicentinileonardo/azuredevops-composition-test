@@ -6,25 +6,22 @@ metadata:
   name: azuredevops-composition-example
   namespace: azuredevops-example
 spec:
-  # Azure DevOps Configuration
   azureDevOps:
-    # @param {string} organization - Replace with your Azure DevOps organization name
     organization: "krateo-kog"
-    
-  # Team Project Configuration
+  
   teamProject:
-    # @param {string} teamProject.name - Name of the Azure DevOps Team Project
+    verbose: true
     name: "krateo-project-from-composition"
-    # @param {string} teamProject.description - Description for the Azure DevOps Team Project
     description: "Created by Krateo Composition"
-    # @param {boolean} teamProject.verbose - Enable verbose logging
-    verbose: true # Enable verbose logging
 
-  # Environment Configuration
   environment:
-    # @param {string} environment.name - Name of the Azure DevOps Environment
+    verbose: true
     name: "krateo-env-from-composition"
-    
     description: "Created by Krateo Composition"
-
-
+    
+  gitRepository:
+    verbose: true
+    name: "krateo-repo-from-composition"
+    api-version: "7.2-preview.2"
+    initialize: true
+    deafultBranch: "refs/heads/test-branch"

@@ -9,26 +9,37 @@ azureDevOps:
 
 # Team Project Configuration
 teamProject:
-  # @param {boolean} teamProject.verbose - Enable verbose logging
-  verbose: true # Enable verbose logging
-  # @param {string} teamProject.name - Name of the Azure DevOps Team Project
+  # @param {boolean} [verbose] - Enable verbose logging
+  verbose: true
+  # @param {string} name - Name of the Azure DevOps Team Project
   name: "krateo-project-from-composition"
-  # @param {string} teamProject.description - Description for the Azure DevOps Team Project
+  # @param {string} description - Description for the Azure DevOps Team Project
   description: "Created by Krateo Composition"
-  # @param {string} teamProject.visibility - Visibility of the Azure DevOps Team Project
+  # @param {string} visibility - Visibility of the Azure DevOps Team Project
   visibility: private
-  # @param {object} teamProject.sourceControlType - Source control type for the Azure DevOps Team Project
+  # @param {object} sourceControlType - Source control type for the Azure DevOps Team Project
   sourceControlType: "Git"
-  # @param {string} teamProject.templateTypeId - Template type ID for the Azure DevOps Team Project
+  # @param {string} templateTypeId - Template type ID for the Azure DevOps Team Project
   templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
 
 # Environment Configuration
 environment:
-  # @param {boolean} environment.verbose - Enable verbose logging
-  verbose: true # Enable verbose logging
-  # @param {string} environment.name - Name of the Azure DevOps Environment
+  # @param {boolean} [verbose] - Enable verbose logging
+  verbose: true
+  # @param {string} name - Name of the Azure DevOps Environment
   name: "krateo-env-from-composition"
-  # @param {string} environment.description - Description for the Azure DevOps Environment
+  # @param {string} description - Description for the Azure DevOps Environment
   description: "Created by Krateo Composition"
 
-
+# Git Repository Configuration
+gitRepository:
+  # @param {boolean} [verbose] - Enable verbose logging
+  verbose: true
+  # @param {string} name - Name of the Azure DevOps Git Repository
+  name: "krateo-repo-from-composition"
+  # @param {string} api-version - Version of the API to use
+  api-version: "7.2-preview.2"
+  # @param {boolean} [initialize] - Whether to initialize the repository
+  initialize: true
+  # @param {string} [deafultBranch] - Default branch for the Git Repository
+  deafultBranch: "refs/heads/main"
