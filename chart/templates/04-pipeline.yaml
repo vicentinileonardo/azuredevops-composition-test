@@ -1,0 +1,30 @@
+{{- $gitRepository := lookup "azuredevops.kog.krateo.io/v1alpha1" "Repository" .Release.Namespace .Values.gitRepository.name }}
+{{- $gitRepositoryId := "" }}
+{{- if $gitRepository }}
+{{- $gitRepositoryId = $gitRepository.status.id }}
+{{- end }}
+
+{{- if $gitRepositoryId }}
+apiVersion: azuredevops.kog.krateo.io/v1alpha1
+kind: Pipeline
+metadata:
+  name: {{ .Values.pipeline.name | lower }}
+  annotations:
+    krateo.io/connector-verbose: "{{ .Values.pipeline.verbose }}"
+spec:
+  authenticationRefs:
+    basicAuthRef: azure-devops-basic-auth 
+  
+  api-version: {{ .Values.pipeline.apiVersion }}
+  organization: {{ .Values.azureDevOps.organization }} 
+  project: {{ .Values.teamProject.name }}
+  
+  configuration:
+    path: {{ .Values.pipeline.configuration.path }}
+    repository: 
+      id: {{ $gitRepositoryId }}   # Dynamically retrieved repository ID
+      type: {{ .Values.pipeline.configuration.repository.type }}
+    type: {{ .Values.pipeline.configuration.type }}
+
+  name: {{ .Values.pipeline.name }}
+{{- end }}

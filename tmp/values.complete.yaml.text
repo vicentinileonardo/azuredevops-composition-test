@@ -1,31 +1,9 @@
-# Default values for krateo-composition-azuredevops-project.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-# Pipeline Configuration
-pipeline:
-  # @param {string} pipeline.name - Name of the Azure DevOps Pipeline
-  name: "krateo-pipeline-from-composition"
-  # @param {string} pipeline.path - Path to the pipeline YAML file in the repository
-  path: "/"
-  # @param {string} pipeline.yamlFileName - Name of the pipeline YAML file
-  yamlFileName: "azure-pipelines.yaml"
 
 # Pipeline Permission Configuration
 pipelinePermission:

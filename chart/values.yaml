@@ -1,45 +1,70 @@
-# Default values for krateo-composition-azuredevops-project.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-# Azure DevOps Configuration
+# @param {object} azureDevOps Azure DevOps configuration
 azureDevOps:
-  # @param {string} organization - Replace with your Azure DevOps organization name
+  # @param {string} organization Replace with your Azure DevOps organization name
   organization: "krateo-kog"
 
-# Team Project Configuration
+# @param {object} teamProject Team Project configuration
 teamProject:
-  # @param {boolean} [verbose] - Enable verbose logging
+  # @param {boolean} [verbose] Enable verbose logging
   verbose: true
-  # @param {string} name - Name of the Azure DevOps Team Project
-  name: "krateo-project-from-composition"
-  # @param {string} description - Description for the Azure DevOps Team Project
+  # @param {string} name Name of the Azure DevOps Team Project
+  name: "project-from-composition"
+  # @param {string} namespace Namespace for the Azure DevOps Team Project
+  namespace: "default"
+  # @param {string} description Description for the Azure DevOps Team Project
   description: "Created by Krateo Composition"
-  # @param {string} visibility - Visibility of the Azure DevOps Team Project
+  # @param {string} visibility Visibility of the Azure DevOps Team Project
   visibility: private
-  # @param {string} sourceControlType - Source control type for the Azure DevOps Team Project
-  sourceControlType: "Git"
-  # @param {string} templateTypeId - Template type ID for the Azure DevOps Team Project
-  templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
+  # @param {object} capabilities Capabilities for the Azure DevOps Team Project
+  capabilities:
+    # @param {object} versioncontrol Version control configuration for the Azure DevOps Team Project
+    versioncontrol:
+      # @param {string} sourceControlType Source control type for the Azure DevOps Team Project
+      sourceControlType: "Git"
+    # @param {object} processTemplate Process template configuration for the Azure DevOps Team Project
+    processTemplate:
+      # @param {string} templateTypeId Template type ID for the Azure DevOps Team Project
+      templateTypeId: 6b724908-ef14-45cf-84f8-768b5384da45
 
-# Environment Configuration
+# @param {object} environment Environment configuration
 environment:
-  # @param {boolean} [verbose] - Enable verbose logging
+  # @param {boolean} [verbose] Enable verbose logging
   verbose: true
-  # @param {string} name - Name of the Azure DevOps Environment
-  name: "krateo-env-from-composition"
-  # @param {string} description - Description for the Azure DevOps Environment
+  # @param {string} name Name of the Azure DevOps Environment
+  name: "environment-from-composition"
+  # @param {string} description Description for the Azure DevOps Environment
   description: "Created by Krateo Composition"
 
-# Git Repository Configuration
+# @param {object} gitRepository Git Repository configuration
 gitRepository:
-  # @param {boolean} [verbose] - Enable verbose logging
+  # @param {boolean} [verbose] Enable verbose logging
   verbose: true
-  # @param {string} name - Name of the Azure DevOps Git Repository
-  name: "krateo-repo-from-composition"
-  # @param {string} api-version - Version of the API to use
+  # @param {string} name Name of the Azure DevOps Git Repository
+  name: "repo-from-composition"
+  # @param {string} api-version Version of the API to use
   apiVersion: "7.2-preview.2"
-  # @param {boolean} [initialize] - Whether to initialize the repository
+  # @param {boolean} [initialize] Whether to initialize the repository
   initialize: true
-  # @param {string} [deafultBranch] - Default branch for the Git Repository
+  # @param {string} [deafultBranch] Default branch for the Git Repository
   defaultBranch: "refs/heads/main"
+
+# @param {object} pipeline Pipeline configuration
+pipeline:
+  # @param {boolean} [verbose] Enable verbose logging
+  verbose: true
+   # @param {string} api-version Version of the API to use
+  apiVersion: "7.2-preview.1"
+  # @param {string} name Name of the Azure DevOps Pipeline
+  name: pipeline-from-composition
+  # @param {string} folder Folder where the pipeline will be created
+  folder: "test-folder-kog"                      
+  # @param {object} configuration Configuration for the pipeline
+  configuration:
+    # @param {string} path Path to the pipeline YAML file within the repository
+    path: azure-pipelines.yml
+    # @param {object} repository Repository configuration for the pipeline
+    repository: 
+      # @param {string} type Type of the repository, e.g., gitHub, azureReposGit, etc.
+      type: azureReposGit
+    # @param {string} type Type of the pipeline configuration, e.g., yaml, designer, etc.
+    type: yaml

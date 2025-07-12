@@ -5,12 +5,13 @@
     "azureDevOps",
     "teamProject",
     "environment",
-    "gitRepository"
+    "gitRepository",
+    "pipeline"
   ],
   "properties": {
     "azureDevOps": {
       "type": "object",
-      "description": "Azure DevOps Configuration",
+      "title": "Azure DevOps configuration",
       "required": [
         "organization"
       ],
@@ -26,13 +27,13 @@
     },
     "teamProject": {
       "type": "object",
-      "description": "Team Project Configuration",
+      "title": "Team Project configuration",
       "required": [
         "name",
+        "namespace",
         "description",
         "visibility",
-        "sourceControlType",
-        "templateTypeId"
+        "capabilities"
       ],
       "properties": {
         "verbose": {
@@ -40,7 +41,6 @@
             "boolean"
           ],
           "title": "Enable verbose logging",
-          "description": "Team Project Configuration",
           "default": "true"
         },
         "name": {
@@ -48,7 +48,14 @@
             "string"
           ],
           "title": "Name of the Azure DevOps Team Project",
-          "default": "\"krateo-project-from-composition\""
+          "default": "\"project-from-composition\""
+        },
+        "namespace": {
+          "type": [
+            "string"
+          ],
+          "title": "Namespace for the Azure DevOps Team Project",
+          "default": "\"default\""
         },
         "description": {
           "type": [
@@ -64,25 +71,53 @@
           "title": "Visibility of the Azure DevOps Team Project",
           "default": "private"
         },
-        "sourceControlType": {
-          "type": [
-            "string"
+        "capabilities": {
+          "type": "object",
+          "title": "Capabilities for the Azure DevOps Team Project",
+          "required": [
+            "versioncontrol",
+            "processTemplate"
           ],
-          "title": "Source control type for the Azure DevOps Team Project",
-          "default": "\"Git\""
-        },
-        "templateTypeId": {
-          "type": [
-            "string"
-          ],
-          "title": "Template type ID for the Azure DevOps Team Project",
-          "default": "6b724908-ef14-45cf-84f8-768b5384da45"
+          "properties": {
+            "versioncontrol": {
+              "type": "object",
+              "title": "Version control configuration for the Azure DevOps Team Project",
+              "required": [
+                "sourceControlType"
+              ],
+              "properties": {
+                "sourceControlType": {
+                  "type": [
+                    "string"
+                  ],
+                  "title": "Source control type for the Azure DevOps Team Project",
+                  "default": "\"Git\""
+                }
+              }
+            },
+            "processTemplate": {
+              "type": "object",
+              "title": "Process template configuration for the Azure DevOps Team Project",
+              "required": [
+                "templateTypeId"
+              ],
+              "properties": {
+                "templateTypeId": {
+                  "type": [
+                    "string"
+                  ],
+                  "title": "Template type ID for the Azure DevOps Team Project",
+                  "default": "6b724908-ef14-45cf-84f8-768b5384da45"
+                }
+              }
+            }
+          }
         }
       }
     },
     "environment": {
       "type": "object",
-      "description": "Environment Configuration",
+      "title": "Environment configuration",
       "required": [
         "name",
         "description"
@@ -93,7 +128,6 @@
             "boolean"
           ],
           "title": "Enable verbose logging",
-          "description": "Environment Configuration",
           "default": "true"
         },
         "name": {
@@ -101,7 +135,7 @@
             "string"
           ],
           "title": "Name of the Azure DevOps Environment",
-          "default": "\"krateo-env-from-composition\""
+          "default": "\"environment-from-composition\""
         },
         "description": {
           "type": [
@@ -114,7 +148,7 @@
     },
     "gitRepository": {
       "type": "object",
-      "description": "Git Repository Configuration",
+      "title": "Git Repository configuration",
       "required": [
         "name",
         "apiVersion"
@@ -125,7 +159,6 @@
             "boolean"
           ],
           "title": "Enable verbose logging",
-          "description": "Git Repository Configuration",
           "default": "true"
         },
         "name": {
@@ -133,7 +166,7 @@
             "string"
           ],
           "title": "Name of the Azure DevOps Git Repository",
-          "default": "\"krateo-repo-from-composition\""
+          "default": "\"repo-from-composition\""
         },
         "apiVersion": {
           "type": [
@@ -155,6 +188,87 @@
           ],
           "title": "Default branch for the Git Repository",
           "default": "\"refs/heads/main\""
+        }
+      }
+    },
+    "pipeline": {
+      "type": "object",
+      "title": "Pipeline configuration",
+      "required": [
+        "apiVersion",
+        "name",
+        "folder",
+        "configuration"
+      ],
+      "properties": {
+        "verbose": {
+          "type": [
+            "boolean"
+          ],
+          "title": "Enable verbose logging",
+          "default": "true"
+        },
+        "apiVersion": {
+          "type": [
+            "string"
+          ],
+          "title": "Version of the API to use",
+          "default": "\"7.2-preview.1\""
+        },
+        "name": {
+          "type": [
+            "string"
+          ],
+          "title": "Name of the Azure DevOps Pipeline",
+          "default": "pipeline-from-composition"
+        },
+        "folder": {
+          "type": [
+            "string"
+          ],
+          "title": "Folder where the pipeline will be created",
+          "default": "\"test-folder-kog\""
+        },
+        "configuration": {
+          "type": "object",
+          "title": "Configuration for the pipeline",
+          "required": [
+            "path",
+            "repository",
+            "type"
+          ],
+          "properties": {
+            "path": {
+              "type": [
+                "string"
+              ],
+              "title": "Path to the pipeline YAML file within the repository",
+              "default": "azure-pipelines.yml"
+            },
+            "repository": {
+              "type": "object",
+              "title": "Repository configuration for the pipeline",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": [
+                    "string"
+                  ],
+                  "title": "Type of the repository, e.g., gitHub, azureReposGit, etc.",
+                  "default": "azureReposGit"
+                }
+              }
+            },
+            "type": {
+              "type": [
+                "string"
+              ],
+              "title": "Type of the pipeline configuration, e.g., yaml, designer, etc.",
+              "default": "yaml"
+            }
+          }
         }
       }
     }

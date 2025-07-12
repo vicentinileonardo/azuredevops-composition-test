@@ -25,3 +25,11 @@ spec:
     apiVersion: "7.2-preview.2"
     initialize: true
     defaultBranch: "refs/heads/test-branch"
+
+  pipeline:
+    verbose: true
+    apiVersion: "7.2-preview.1"
+    name: "pipeline-from-composition"
+    folder: "test-folder-kog"
+    configuration:
+      path: azure-pipelines.yml

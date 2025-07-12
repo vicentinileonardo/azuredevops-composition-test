@@ -113,22 +113,17 @@ EOF
 ```
 
 ```sh
+# Apply the Composition Definition
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/compositiondefinition.yaml
 
-# wait for the composition definition to be ready true
+# Wait for the Composition Definition to be Ready=True
 kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 
+# Apply the Composition
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
 
-
-
-
-#Check the status of the resources created by the composition:
-
+# Wait for the resources created by the Composition to be ready
 kubectl wait teamproject krateo-project-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-kubectl wait environment krateo-environment-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-git-repository-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-
-
-
+kubectl wait environment krateo-env-from-composition --for condition=Ready=True --timeout=300s
+kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 ```
