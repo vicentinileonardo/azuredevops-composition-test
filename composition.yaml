@@ -24,4 +24,4 @@ spec:
     name: "krateo-repo-from-composition"
     apiVersion: "7.2-preview.2"
     initialize: true
-    deafultBranch: "refs/heads/test-branch"
+    defaultBranch: "refs/heads/test-branch"

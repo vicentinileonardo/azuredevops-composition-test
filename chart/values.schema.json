@@ -149,7 +149,7 @@
           "title": "Whether to initialize the repository",
           "default": "true"
         },
-        "deafultBranch": {
+        "defaultBranch": {
           "type": [
             "string"
           ],

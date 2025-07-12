@@ -42,4 +42,4 @@ gitRepository:
   # @param {boolean} [initialize] - Whether to initialize the repository
   initialize: true
   # @param {string} [deafultBranch] - Default branch for the Git Repository
-  deafultBranch: "refs/heads/main"
+  defaultBranch: "refs/heads/main"

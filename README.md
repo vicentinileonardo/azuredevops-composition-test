@@ -88,7 +88,7 @@ done
 kubectl wait deployments azuredevops-provider-kog-pipelinepermission-controller --for condition=Available=True --namespace krateo-system --timeout=300s
 ```
 
-### Create the azuredevops-system namespace
+### Create the azuredevops-example namespace
 
 ```sh
 kubectl create ns azuredevops-example
@@ -119,17 +119,13 @@ kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops
 kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
+
+
+
+
+#Check the status of the resources created by the composition:
+
+
+
+
 ```
-
-
-Check the status of the composition:
-```sh
-kubectl get azuredevopscompositionexample.composition.krateo.io/azuredevops-composition-example -n azuredevops-example
-```
-
-wait for the composition to be ready:
-```sh
-kubectl wait azuredevopscompositionexample.composition.krateo.io/azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-
-Check the status of the resources created by the composition:
-```sh
