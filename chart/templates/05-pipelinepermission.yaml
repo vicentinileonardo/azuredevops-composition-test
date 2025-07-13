@@ -21,7 +21,7 @@ spec:
   project: {{ .Values.teamProject.name }}
   
   resourceType: "environment" 
-  resourceId: {{ $environment.status.id }}
+  resourceId: "{{ $environment.status.id }}" 
 
   allPipelines:
     authorized: {{ .Values.pipelinePermission.allPipelines.authorized }}

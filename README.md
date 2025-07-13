@@ -136,8 +136,8 @@ kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops
 #### Wait for the first 3 resources created by the Composition to be ready
 
 **Notes**:
-- you need to change the names of the resources in the commands below to match the names defined in your Composition.
-- you need to change the namespace in the commands below to match the namespace where you applied the Composition.
+- you need to change the names of the resources in the commands below to match the names defined in your Composition (if you changed them).
+- you need to change the namespace in the commands below to match the namespace where you applied the Composition (if you changed it).
 
 ```sh
 # TeamProject
