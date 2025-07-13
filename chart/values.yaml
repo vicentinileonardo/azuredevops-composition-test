@@ -60,7 +60,7 @@ pipeline:
     type: yaml
 
 # @param {object} pipelinePermission PipelinePermission configuration
-pipelinepermission:
+pipelinePermission:
   # @param {boolean} [verbose] Enable verbose logging
   verbose: true
   # @param {string} name Name of the Azure DevOps PipelinePermission

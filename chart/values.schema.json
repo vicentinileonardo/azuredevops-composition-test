@@ -7,7 +7,7 @@
     "environment",
     "gitRepository",
     "pipeline",
-    "pipelinepermission"
+    "pipelinePermission"
   ],
   "properties": {
     "azureDevOps": {
@@ -222,7 +222,7 @@
         }
       }
     },
-    "pipelinepermission": {
+    "pipelinePermission": {
       "type": "object",
       "title": "PipelinePermission configuration",
       "required": [

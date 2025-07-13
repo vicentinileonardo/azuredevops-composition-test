@@ -129,10 +129,19 @@ kubectl wait compositiondefinition azuredevops-composition-example --for conditi
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
 ```
 
-### Wait for the first 3 resources created by the Composition to be ready
+### Checking the status of the Composition
+
+**Note**: The Composition will create multiple resources, and it may take some time for all of them to be created and become ready. With the default settings, the entire process should take approximately 10 to 15 minutes. Please note that some resources are interdependent, with relationships established through identifiers available in the status field of the resources.
+
+#### Wait for the first 3 resources created by the Composition to be ready
+
+**Notes**:
+- you need to change the names of the resources in the commands below to match the names defined in your Composition.
+- you need to change the namespace in the commands below to match the namespace where you applied the Composition.
+
 ```sh
 # TeamProject
-until kubectl get teamprojects.azuredevops.kog.krateo.io krateo-project-from-composition -n azuredevops-example &>/dev/null; do
+until kubectl get teamprojects.azuredevops.krateo.io krateo-project-from-composition -n azuredevops-example &>/dev/null; do
   echo "Waiting for TeamProject resource to be created..."
   sleep 5
 done
@@ -156,7 +165,7 @@ echo "GitRepository resource created, waiting for GitRepository resource to be r
 kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 ```
 
-### Wait for the Pipeline resource to be ready
+#### Wait for the Pipeline resource to be ready
 
 The Pipeline resource is not immediately available after applying the Composition since it needs the the ID of the GitRepository.
 Therefore it will be created after the GitRepository is ready and the `status.id` field of GitRepository is populated.
@@ -170,7 +179,7 @@ echo "Pipeline resource created, waiting for Pipeline resource to be ready..."
 kubectl wait pipelines.azuredevops.kog.krateo.io pipeline-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 ```
 
-### Wait for the PipelinePermission resource to be ready
+#### Wait for the PipelinePermission resource to be ready
 
 The PipelinePermission resource is created after the Pipeline resource is ready, as it needs the IDs of both the Pipeline and Environment.
 

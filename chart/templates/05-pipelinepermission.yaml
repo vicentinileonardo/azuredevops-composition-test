@@ -11,12 +11,12 @@ kind: PipelinePermission
 metadata:
   name: {{ .Values.pipelinePermission.name | lower }}
   annotations:
-    krateo.io/connector-verbose: "{{ .Values.pipelinepermission.verbose }}"
+    krateo.io/connector-verbose: "{{ .Values.pipelinePermission.verbose }}"
 spec:
   authenticationRefs:
     basicAuthRef: azure-devops-basic-auth
   
-  api-version: {{ .Values.pipelinepermission.apiVersion }}
+  api-version: {{ .Values.pipelinePermission.apiVersion }}
   organization: {{ .Values.azureDevOps.organization }}
   project: {{ .Values.teamProject.name }}
   

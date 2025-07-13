@@ -32,7 +32,7 @@ spec:
     name: "pipeline-from-composition"
     folder: "test-folder-kog"
   
-  pipelinepermission:
+  pipelinePermission:
     verbose: true
     apiVersion: "7.2-preview.1"
     name: "pipelinepermission-from-composition"
