@@ -119,7 +119,7 @@ EOF
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/compositiondefinition.yaml
 ```
 
-### Wait for the Composition Definition to be Ready=True
+### Wait for the Composition Definition to be `Ready=True`
 ```sh
 kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 ```
@@ -129,27 +129,58 @@ kubectl wait compositiondefinition azuredevops-composition-example --for conditi
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
 ```
 
-### Wait for the resources created by the Composition to be ready
+### Wait for the first 3 resources created by the Composition to be ready
 ```sh
+# TeamProject
+until kubectl get teamprojects.azuredevops.kog.krateo.io krateo-project-from-composition -n azuredevops-example &>/dev/null; do
+  echo "Waiting for TeamProject resource to be created..."
+  sleep 5
+done
+echo "TeamProject resource created, waiting for TeamProject resource to be ready..."
 kubectl wait teamprojects.azuredevops.krateo.io krateo-project-from-composition --for condition=Ready=True --timeout=300s
-kubectl wait environments.azuredevops.krateo.io krateo-env-from-composition --for condition=Ready=True --timeout=300s
-kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 
-# Pipeline resource is not immediately available after creation, since it needs the the ID of the GitRepository
-# Therefore it will be created after the GitRepository is ready and the `status.id` field is populated.
+# Environment
+until kubectl get environments.azuredevops.krateo.io krateo-env-from-composition -n azuredevops-example &>/dev/null; do
+  echo "Waiting for Environment resource to be created..."
+  sleep 5
+done
+echo "Environment resource created, waiting for Environment resource to be ready..."
+kubectl wait environments.azuredevops.krateo.io krateo-env-from-composition --for condition=Ready=True --timeout=300s
+
+# GitRepository
+until kubectl get gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition -n azuredevops-example &>/dev/null; do
+  echo "Waiting for GitRepository resource to be created..."
+  sleep 5
+done
+echo "GitRepository resource created, waiting for GitRepository resource to be ready..."
+kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+```
+
+### Wait for the Pipeline resource to be ready
+
+The Pipeline resource is not immediately available after applying the Composition since it needs the the ID of the GitRepository.
+Therefore it will be created after the GitRepository is ready and the `status.id` field of GitRepository is populated.
+
+```sh
 until kubectl get pipelines.azuredevops.kog.krateo.io pipeline-from-composition -n azuredevops-example &>/dev/null; do
   echo "Waiting for Pipeline resource to be created..."
   sleep 5
 done
+echo "Pipeline resource created, waiting for Pipeline resource to be ready..."
 kubectl wait pipelines.azuredevops.kog.krateo.io pipeline-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+```
 
+### Wait for the PipelinePermission resource to be ready
 
+The PipelinePermission resource is created after the Pipeline resource is ready, as it needs the IDs of both the Pipeline and Environment.
+
+```sh
 until kubectl get pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition -n azuredevops-example &>/dev/null; do
   echo "Waiting for PipelinePermission resource to be created..."
   sleep 5
 done
+echo "PipelinePermission resource created, waiting for PipelinePermission resource to be ready..."
 kubectl wait pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
-
 ```
 
 

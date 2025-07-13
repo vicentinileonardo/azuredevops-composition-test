@@ -1,4 +1,6 @@
-{{- $environment := lookup "azuredevops.kog.krateo.io/v1alpha1" "Environment" .Release.Namespace (.Values.environment.name | lower) }}
+# Note that the Environment resource is managed by the Azure DevOps provider "classic" while the PipelinePermission resource is managed by the Azure DevOps provider KOG.
+
+{{- $environment := lookup "azuredevops.krateo.io/v1alpha1" "Environment" .Release.Namespace (.Values.environment.name | lower) }}
 {{- if and $environment $environment.status.id }}
 
 {{- $pipeline := lookup "azuredevops.kog.krateo.io/v1alpha1" "Pipeline" .Release.Namespace (.Values.pipeline.name | lower) }}
