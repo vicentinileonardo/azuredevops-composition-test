@@ -6,15 +6,11 @@ It demonstrates the seamless integration of resources managed by both the Azure 
 ## Features
 
 This Composition implements the following steps:
-1.  **Creates an Azure DevOps Team Project**: A new Team Project is provisioned in your specified Azure DevOps organization, managed by the Azure DevOps Provider (classic).
-2.  **Creates an Azure DevOps Environment**: An Environment is created within the new Team Project, managed by the Azure DevOps Provider (classic).
-3.  **Creates an Azure DevOps Git Repository**: A Git Repository is created within the newly created Team Project, managed by the Azure DevOps Provider KOG.
-4.  **Creates an Azure DevOps Pipeline**: A Pipeline is created in the Azure DevOps organization, which is associated with the Git Repository created in the previous step, managed by the Azure DevOps Provider KOG.
-
----
-TODO
-
-5.  **Grants Pipeline Permissions**: Permissions are granted for the created Pipeline to access the created Environment. This crucial step leverages the Azure DevOps Provider KOG, dynamically looking up the IDs of the Environment and Pipeline created by the classic provider.
+1.  **Creates an Azure DevOps `TeamProject`**: A new `TeamProject` is provisioned in your specified Azure DevOps organization, managed by the Azure DevOps Provider (classic).
+2.  **Creates an Azure DevOps `Environment`**: An `Environment` is created within the new Team Project, managed by the Azure DevOps Provider (classic).
+3.  **Creates an Azure DevOps `GitRepository`**: A `GitRepository` is created within the newly created Team Project, managed by the Azure DevOps Provider KOG.
+4.  **Creates an Azure DevOps `Pipeline`**: A `Pipeline` is created in the Azure DevOps organization, which is associated with the Git Repository created in the previous step, managed by the Azure DevOps Provider KOG.
+5.  **Grants Azure DevOps Pipeline Permissions**: A `PipelinePermission` resource is created to grant the necessary permissions for the Pipeline to access the Environment, managed by the Azure DevOps Provider KOG.
 
 ## Requirements
 
@@ -27,7 +23,7 @@ Before installing this Composition, ensure you have the following:
 helm repo add krateo https://charts.krateo.io
 helm repo update krateo
 helm install azuredevops-provider krateo/azuredevops-provider --namespace krateo-system --create-namespace
-helm install azuredevops-provider-kog krateo/azuredevops-provider-kog --namespace krateo-system
+helm install azuredevops-provider-kog krateo/azuredevops-provider-kog --namespace krateo-system --create-namespace
 ```
 
 ### Create an Azure DevOps Personal Access Token (PAT) and Kubernetes Secret
@@ -79,20 +75,18 @@ spec:
 EOF
 ```
 
-### Wait for Azure DevOps Provider KOG PipelinePermission controller to be ready
-
-```sh
-until kubectl get deployment azuredevops-provider-kog-pipelinepermission-controller -n krateo-system &>/dev/null; do
-  echo "Waiting for PipelinePermission controller deployment to be created..."
-  sleep 5
-done
-kubectl wait deployments azuredevops-provider-kog-pipelinepermission-controller --for condition=Available=True --namespace krateo-system --timeout=300s
-```
-
 ### Create the azuredevops-example namespace
 
 ```sh
 kubectl create ns azuredevops-example
+```
+
+### Wait for RestDefinitions to be ready
+
+```sh
+kubectl wait restdefinitions.swaggergen.krateo.io azuredevops-provider-kog-gitrepository --for condition=Ready=True --namespace krateo-system --timeout=300s
+kubectl wait restdefinitions.swaggergen.krateo.io azuredevops-provider-kog-pipeline --for condition=Ready=True --namespace krateo-system --timeout=300s
+kubectl wait restdefinitions.swaggergen.krateo.io azuredevops-provider-kog-pipelinepermission --for condition=Ready=True --namespace krateo-system --timeout=300s
 ```
 
 ### Set up `BasicAuth` for Azure DevOps Provider KOG
@@ -112,7 +106,6 @@ spec:
     key: token
 EOF
 ```
-
 
 ### Apply the Composition Definition
 ```sh
