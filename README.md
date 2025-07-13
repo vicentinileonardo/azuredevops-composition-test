@@ -117,8 +117,10 @@ EOF
 ### Apply the Composition Definition
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/compositiondefinition.yaml
+```
 
-# Wait for the Composition Definition to be Ready=True
+### Wait for the Composition Definition to be Ready=True
+```sh
 kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
 ```
 
