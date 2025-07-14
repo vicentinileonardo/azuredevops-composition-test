@@ -1,5 +1,5 @@
 {{- $gitRepository := lookup "azuredevops.kog.krateo.io/v1alpha1" "GitRepository" .Release.Namespace (.Values.gitRepository.name | lower) }}
-{{- if and $gitRepository $gitRepository.status.id }}
+{{- if and $gitRepository $gitRepository.status $gitRepository.status.id }}
 apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: Pipeline
 metadata:

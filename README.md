@@ -187,7 +187,6 @@ echo "PipelinePermission resource created, waiting for PipelinePermission resour
 kubectl wait pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
-
 ### Cleanup
 
 ```sh
