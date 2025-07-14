@@ -136,28 +136,28 @@ kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops
 
 ```sh
 # TeamProject
-until kubectl get teamprojects.azuredevops.krateo.io krateo-project-from-composition -n azuredevops-system &>/dev/null; do
+until kubectl get teamprojects.azuredevops.krateo.io project-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for TeamProject resource to be created..."
   sleep 5
 done
 echo "TeamProject resource created, waiting for TeamProject resource to be ready..."
-kubectl wait teamprojects.azuredevops.krateo.io krateo-project-from-composition --for condition=Ready=True --timeout=300s
+kubectl wait teamprojects.azuredevops.krateo.io project-from-composition --for condition=Ready=True --timeout=300s
 
 # Environment
-until kubectl get environments.azuredevops.krateo.io krateo-env-from-composition -n azuredevops-system &>/dev/null; do
+until kubectl get environments.azuredevops.krateo.io environment-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for Environment resource to be created..."
   sleep 5
 done
 echo "Environment resource created, waiting for Environment resource to be ready..."
-kubectl wait environments.azuredevops.krateo.io krateo-env-from-composition --for condition=Ready=True --timeout=300s
+kubectl wait environments.azuredevops.krateo.io environment-from-composition --for condition=Ready=True --timeout=300s
 
 # GitRepository
-until kubectl get gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition -n azuredevops-system &>/dev/null; do
+until kubectl get gitrepositories.azuredevops.kog.krateo.io repo-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for GitRepository resource to be created..."
   sleep 5
 done
 echo "GitRepository resource created, waiting for GitRepository resource to be ready..."
-kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
+kubectl wait gitrepositories.azuredevops.kog.krateo.io repo-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
 #### Wait for the Pipeline resource to be ready
