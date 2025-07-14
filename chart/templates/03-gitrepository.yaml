@@ -1,5 +1,7 @@
 {{- $teamProject := lookup "azuredevops.krateo.io/v1alpha1" "TeamProject" .Release.Namespace (.Values.teamProject.name | lower) }}
 {{- if and $teamProject $teamProject.status $teamProject.status.id }}
+# The above guard is needed to ensure that the Team Project is created before the GitRepository.
+# Otherwise, the GitRepository creation will fail to create if it happens before the TeamProject is created on Azure DevOps.
 
 apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: GitRepository
