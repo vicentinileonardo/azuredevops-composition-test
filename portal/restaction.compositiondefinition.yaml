@@ -1,0 +1,12 @@
+apiVersion: templates.krateo.io/v1
+kind: RESTAction
+metadata:
+  name: azuredevops-composition-example-compositiondefinition
+  namespace: azuredevops-example
+spec:
+  api:
+  - name: getCompositionDefinition
+    path: "/apis/core.krateo.io/v1alpha1/namespaces/azuredevops-example/compositiondefinitions/azuredevops-composition-example"
+    verb: GET
+    headers:
+    - 'Accept: application/json'

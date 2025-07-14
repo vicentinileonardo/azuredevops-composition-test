@@ -1,5 +1,5 @@
 apiVersion: v2
-name: azuredevops-composition-example
+name: azuredevops-starter
 description: A Helm chart for showcasing Krateo Composition with Azure DevOps
 
 # A chart can be either an 'application' or a 'library' chart.

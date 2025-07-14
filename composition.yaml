@@ -1,27 +1,27 @@
 apiVersion: composition.krateo.io/v0-0-1
-kind: AzuredevopsCompositionExample
+kind: AzuredevopsStarter
 metadata:
   labels:
     krateo.io/composition-version: v0-0-1
-  name: azuredevops-composition-example
-  namespace: azuredevops-example
+  name: azuredevops-starter
+  namespace: azuredevops-system
 spec:
   azureDevOps:
     organization: "krateo-kog"
   
   teamProject:
     verbose: true
-    name: "krateo-project-from-composition"
+    name: "project-from-composition"
     #description: "Created by Krateo Composition"
 
   environment:
     verbose: true
-    name: "krateo-env-from-composition"
+    name: "environment-from-composition"
     description: "Created by Krateo Composition"
     
   gitRepository:
     verbose: true
-    name: "krateo-repo-from-composition"
+    name: "repo-from-composition"
     apiVersion: "7.2-preview.2"
     initialize: true
     defaultBranch: "refs/heads/test-branch"

@@ -1,6 +1,6 @@
-# Krateo Composition for Azure DevOps
+# Azure DevOps Starter: Krateo Composition for Azure DevOps
 
-This is a Krateo Composition that orchestrates the creation of a complete Azure DevOps project, including a Team Project, Environment, Git Repository, Pipeline, and Pipeline Permissions. 
+This is a Krateo Composition that orchestrates the creation of a Azure DevOps basic setup, including a `TeamProject`, `Environment`, `GitRepository`, `Pipeline`, and `PipelinePermission`. 
 It demonstrates the seamless integration of resources managed by both the Azure DevOps Provider (classic) and the Azure DevOps Provider KOG.
 
 ## Features
@@ -75,13 +75,7 @@ spec:
 EOF
 ```
 
-### Create the azuredevops-example namespace
-
-```sh
-kubectl create ns azuredevops-example
-```
-
-### Wait for RestDefinitions to be ready
+### Wait for the `RestDefinitions` of Azure DevOps Provider KOG to be ready
 
 ```sh
 kubectl wait restdefinitions.swaggergen.krateo.io azuredevops-provider-kog-gitrepository --for condition=Ready=True --namespace krateo-system --timeout=300s
@@ -89,7 +83,15 @@ kubectl wait restdefinitions.swaggergen.krateo.io azuredevops-provider-kog-pipel
 kubectl wait restdefinitions.swaggergen.krateo.io azuredevops-provider-kog-pipelinepermission --for condition=Ready=True --namespace krateo-system --timeout=300s
 ```
 
+### Create the `azuredevops-system` namespace
+
+```sh
+kubectl create ns azuredevops-system
+```
+
 ### Set up `BasicAuth` for Azure DevOps Provider KOG
+
+Note that the `BasicAuth` resource needs to be created in the `azuredevops-system` namespace, which is where the Azure DevOps Provider KOG resources will be created in the case of this Composition.
 
 ```sh
 kubectl apply -f - <<EOF
@@ -97,7 +99,7 @@ apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: BasicAuth
 metadata:
   name: azure-devops-basic-auth
-  namespace: azuredevops-example
+  namespace: azuredevops-system
 spec:
   username: "anything"  # Any value as official Azure DevOps OAS suggests (field not used)
   passwordRef:
@@ -107,22 +109,22 @@ spec:
 EOF
 ```
 
-### Apply the Composition Definition
+### Apply the `CompositionDefinition`
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/compositiondefinition.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/compositiondefinition.yaml
 ```
 
-### Wait for the Composition Definition to be `Ready=True`
+### Wait for the `CompositionDefinition` to be `Ready=True`
 ```sh
-kubectl wait compositiondefinition azuredevops-composition-example --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+kubectl wait compositiondefinition azuredevops-starter --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
-### Apply the Composition
+### Apply the `Composition`
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-composition-test/refs/heads/main/composition.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/composition.yaml
 ```
 
-### Checking the status of the Composition
+### Checking the status of the `Composition`
 
 **Note**: The Composition will create multiple resources, and it may take some time for all of them to be created and become ready. With the default settings, the entire process should take approximately 10 to 15 minutes. Please note that some resources are interdependent, with relationships established through identifiers available in the status field of the resources.
 
@@ -134,7 +136,7 @@ kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops
 
 ```sh
 # TeamProject
-until kubectl get teamprojects.azuredevops.krateo.io krateo-project-from-composition -n azuredevops-example &>/dev/null; do
+until kubectl get teamprojects.azuredevops.krateo.io krateo-project-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for TeamProject resource to be created..."
   sleep 5
 done
@@ -142,7 +144,7 @@ echo "TeamProject resource created, waiting for TeamProject resource to be ready
 kubectl wait teamprojects.azuredevops.krateo.io krateo-project-from-composition --for condition=Ready=True --timeout=300s
 
 # Environment
-until kubectl get environments.azuredevops.krateo.io krateo-env-from-composition -n azuredevops-example &>/dev/null; do
+until kubectl get environments.azuredevops.krateo.io krateo-env-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for Environment resource to be created..."
   sleep 5
 done
@@ -150,12 +152,12 @@ echo "Environment resource created, waiting for Environment resource to be ready
 kubectl wait environments.azuredevops.krateo.io krateo-env-from-composition --for condition=Ready=True --timeout=300s
 
 # GitRepository
-until kubectl get gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition -n azuredevops-example &>/dev/null; do
+until kubectl get gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for GitRepository resource to be created..."
   sleep 5
 done
 echo "GitRepository resource created, waiting for GitRepository resource to be ready..."
-kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+kubectl wait gitrepositories.azuredevops.kog.krateo.io krateo-repo-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
 #### Wait for the Pipeline resource to be ready
@@ -164,12 +166,12 @@ The Pipeline resource is not immediately available after applying the Compositio
 Therefore it will be created after the GitRepository is ready and the `status.id` field of GitRepository is populated.
 
 ```sh
-until kubectl get pipelines.azuredevops.kog.krateo.io pipeline-from-composition -n azuredevops-example &>/dev/null; do
+until kubectl get pipelines.azuredevops.kog.krateo.io pipeline-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for Pipeline resource to be created..."
   sleep 5
 done
 echo "Pipeline resource created, waiting for Pipeline resource to be ready..."
-kubectl wait pipelines.azuredevops.kog.krateo.io pipeline-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+kubectl wait pipelines.azuredevops.kog.krateo.io pipeline-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
 #### Wait for the PipelinePermission resource to be ready
@@ -177,12 +179,19 @@ kubectl wait pipelines.azuredevops.kog.krateo.io pipeline-from-composition --for
 The PipelinePermission resource is created after the Pipeline resource is ready, as it needs the IDs of both the Pipeline and Environment.
 
 ```sh
-until kubectl get pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition -n azuredevops-example &>/dev/null; do
+until kubectl get pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for PipelinePermission resource to be created..."
   sleep 5
 done
 echo "PipelinePermission resource created, waiting for PipelinePermission resource to be ready..."
-kubectl wait pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition --for condition=Ready=True --namespace azuredevops-example --timeout=300s
+kubectl wait pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
 
+### Cleanup
+
+```sh
+kubectl delete -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/composition.yaml
+
+kubectl delete -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/compositiondefinition.yaml
+```
