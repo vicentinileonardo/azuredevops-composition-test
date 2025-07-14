@@ -11,6 +11,6 @@ spec:
 
   projectRef:
     name: {{ .Values.teamProject.name | lower }}
-    namespace: {{ .Values.teamProject.namespace | lower | default "default" }}
+    namespace: "default" # teamproject resource is not namespaced
   name: {{ .Values.environment.name }}
   description: {{ .Values.environment.description | default "Created by Krateo Composition" }}
