@@ -1,3 +1,6 @@
+{{- $teamProject := lookup "azuredevops.krateo.io/v1alpha1" "TeamProject" .Release.Namespace (.Values.teamProject.name | lower) }}
+{{- if and $teamProject $teamProject.status $teamProject.status.id }}
+
 apiVersion: azuredevops.kog.krateo.io/v1alpha1
 kind: GitRepository
 metadata:
@@ -15,3 +18,5 @@ spec:
   name: {{ .Values.gitRepository.name | lower }}
   initialize: {{ .Values.gitRepository.initialize | default true }}
   defaultBranch: {{ .Values.gitRepository.defaultBranch | default "refs/heads/main" }}
+
+{{- end }}

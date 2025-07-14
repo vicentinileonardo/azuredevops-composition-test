@@ -150,8 +150,14 @@ until kubectl get environments.azuredevops.krateo.io environment-from-compositio
 done
 echo "Environment resource created, waiting for Environment resource to be ready..."
 kubectl wait environments.azuredevops.krateo.io environment-from-composition --for condition=Ready=True --timeout=300s
+```
 
-# GitRepository
+#### Wait for the GitRepository resource to be ready
+
+The GitRepository resource is not immediately available after applying the Composition since it needs the TeamProject to be ready.
+Therefore it will be created after the TeamProject is ready and the `status.id` field of TeamProject is populated.
+
+```sh
 until kubectl get gitrepositories.azuredevops.kog.krateo.io repo-from-composition -n azuredevops-system &>/dev/null; do
   echo "Waiting for GitRepository resource to be created..."
   sleep 5
