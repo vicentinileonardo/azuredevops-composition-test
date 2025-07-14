@@ -1,0 +1,12 @@
+apiVersion: templates.krateo.io/v1
+kind: RESTAction
+metadata:
+  name: azuredevops-starter-schema-notordered
+  namespace: azuredevops-system
+spec:
+  api:
+  - headers:
+    - 'Accept: application/json'
+    name: getSchemaNotOrdered
+    path: /api/v1/namespaces/azuredevops-system/configmaps/azuredevopsstarters-v0-0-1-jsonschema-configmap
+    verb: GET

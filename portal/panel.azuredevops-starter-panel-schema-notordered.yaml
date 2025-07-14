@@ -1,0 +1,56 @@
+kind: Panel
+apiVersion: widgets.templates.krateo.io/v1beta1
+metadata:
+  name: azuredevops-starter-panel-schema-notordered
+  namespace: azuredevops-system
+  labels:
+    krateo.io/portal-page: templates
+spec:
+  apiRef:
+    name: azuredevops-starter-compositiondefinition # restaction name
+    namespace: azuredevops-system
+  widgetData:
+    clickActionId: template-click-action
+    footer:
+      - resourceRefId: template-panel-button
+    tags:
+      - azuredevops-system
+      - 0.0.1
+    icon:
+      name: fa-solid fa-cubes
+    items:
+      - resourceRefId: template-panel-paragraph
+    title: Azure DevOps Starter (Not Ordered)
+    actions:
+      openDrawer:
+        - id: template-click-action
+          resourceRefId: template-form
+          type: openDrawer
+          size: large
+          title: Azure DevOps Starter (Not Ordered)
+  widgetDataTemplate:
+    - forPath: icon.color
+      expression: ${ ((.getCompositionDefinition?.status?.conditions // []) | map(select(.type == "Ready") | if .status == "False" then "orange" elif .status == "True" then "green" else "grey" end) | first) // "grey" }
+    - forPath: headerLeft
+      expression: ${ ((.getCompositionDefinition?.status?.conditions // []) | map(select(.type == "Ready") | if .status == "False" then "Ready:False" elif .status == "True" then "Ready:True" else "Ready:Unknown" end) | first) // "Ready:Unknown" }
+    - forPath: headerRight
+      expression: ${ .getCompositionDefinition // {} | .metadata.creationTimestamp // "In the process of being created" }
+  resourcesRefs:
+    - id: template-panel-paragraph
+      apiVersion: widgets.templates.krateo.io/v1beta1
+      name: azuredevops-starter-panel-paragraph-schema-notordered
+      namespace: azuredevops-system
+      resource: paragraphs
+      verb: GET
+    - id: template-panel-button
+      apiVersion: widgets.templates.krateo.io/v1beta1
+      name: azuredevops-starter-panel-button-schema-notordered
+      namespace: azuredevops-system
+      resource: buttons
+      verb: GET
+    - id: template-form
+      apiVersion: widgets.templates.krateo.io/v1beta1
+      name: azuredevops-starter-form-notordered
+      namespace: azuredevops-system
+      resource: forms
+      verb: GET

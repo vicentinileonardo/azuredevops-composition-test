@@ -1,0 +1,8 @@
+kind: Paragraph
+apiVersion: widgets.templates.krateo.io/v1beta1
+metadata:
+  name: azuredevops-starter-panel-paragraph-schema-notordered
+  namespace: azuredevops-system
+spec:
+  widgetData:
+    text: This is a card for Azure DevOps Starter (values.schema.json order form)

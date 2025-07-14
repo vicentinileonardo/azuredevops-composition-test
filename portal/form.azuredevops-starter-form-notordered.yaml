@@ -1,15 +1,15 @@
 kind: Form
 apiVersion: widgets.templates.krateo.io/v1beta1
 metadata:
-  name: azuredevops-form
-  namespace: azuredevops-example
+  name: azuredevops-starter-form-notordered
+  namespace: azuredevops-system
 spec:
   widgetData:
     schema: {}
-    submitActionId: firework-submit-action-from-string-schema # change
+    submitActionId: azuredevops-starter-submit-action-from-string-schema
     actions:
       rest:
-        - id: firework-submit-action-from-string-schema # change
+        - id: azuredevops-starter-submit-action-from-string-schema
           onEventNavigateTo:
             eventReason: "CompositionCreated"
             url: "/compositions/${metadata.namespace}/${metadata.name}"
@@ -26,9 +26,9 @@ spec:
   resourcesRefs:
     - id: composition-to-post
       apiVersion: composition.krateo.io/v0-0-1
-      namespace: azuredevops-example
-      resource: azuredevopscompositionexample
+      namespace: azuredevops-system
+      resource: azuredevopsstarters
       verb: POST
   apiRef:
-    name: fireworksapp-schema-notordered # restaction name
-    namespace: azuredevops-example
+    name: azuredevops-starter-schema-notordered # restaction name
+    namespace: azuredevops-system
