@@ -20,7 +20,7 @@
         "organization": {
           "type": "string",
           "title": "Replace with your Azure DevOps organization name",
-          "default": "\"krateo-kog\""
+          "default": "krateo-kog"
         }
       }
     },
@@ -40,12 +40,12 @@
         "name": {
           "type": "string",
           "title": "Name of the Azure DevOps Team Project",
-          "default": "\"project-from-composition\""
+          "default": "project-from-composition"
         },
         "description": {
           "type": "string",
           "title": "Description for the Azure DevOps Team Project",
-          "default": "\"Created by Krateo Composition\""
+          "default": "Created by Krateo Composition"
         },
         "visibility": {
           "type": "string",
@@ -65,7 +65,7 @@
                 "sourceControlType": {
                   "type": "string",
                   "title": "Type of source control",
-                  "default": "\"Git\""
+                  "default": "Git"
                 }
               }
             },
@@ -77,7 +77,7 @@
                 "templateTypeId": {
                   "type": "string",
                   "title": "ID of the process template type",
-                  "default": "\"6b724908-ef14-45cf-84f8-768b5384da45\""
+                  "default": "6b724908-ef14-45cf-84f8-768b5384da45"
                 }
               }
             }
@@ -101,12 +101,12 @@
         "name": {
           "type": "string",
           "title": "Name of the Azure DevOps Environment",
-          "default": "\"environment-from-composition\""
+          "default": "environment-from-composition"
         },
         "description": {
           "type": "string",
           "title": "Description for the Azure DevOps Environment",
-          "default": "\"Created by Krateo Composition\""
+          "default": "Created by Krateo Composition"
         }
       }
     },
@@ -126,12 +126,12 @@
         "name": {
           "type": "string",
           "title": "Name of the Azure DevOps Git Repository",
-          "default": "\"repo-from-composition\""
+          "default": "repo-from-composition"
         },
         "apiVersion": {
           "type": "string",
           "title": "Version of the API to use",
-          "default": "\"7.2-preview.2\""
+          "default": "7.2-preview.2"
         },
         "initialize": {
           "type": "boolean",
@@ -141,7 +141,7 @@
         "defaultBranch": {
           "type": "string",
           "title": "Default branch for the Git Repository",
-          "default": "\"refs/heads/main\""
+          "default": "refs/heads/main"
         }
       }
     },
@@ -162,7 +162,7 @@
         "apiVersion": {
           "type": "string",
           "title": "Version of the API to use",
-          "default": "\"7.2-preview.1\""
+          "default": "7.2-preview.1"
         },
         "name": {
           "type": "string",
@@ -172,7 +172,7 @@
         "folder": {
           "type": "string",
           "title": "Folder where the pipeline will be created",
-          "default": "\"test-folder-kog\""
+          "default": "test-folder-kog"
         },
         "configuration": {
           "type": "object",
@@ -232,7 +232,7 @@
         "apiVersion": {
           "type": "string",
           "title": "Version of the API to use",
-          "default": "\"7.2-preview.1\""
+          "default": "7.2-preview.1"
         },
         "allPipelines": {
           "type": "object",

@@ -17,9 +17,9 @@ spec:
           payloadKey: spec
           resourceRefId: composition-to-post
           type: rest
-          #payloadToOverride:
-          #- name: metadata.name
-          #  value: "test_placeholder"
+          payloadToOverride:
+          - name: metadata.name
+            value: ${ teamProject.name }
   widgetDataTemplate:
     - forPath: stringSchema
       expression: ${ .getSchemaNotOrdered.data["values.schema.json"] }
