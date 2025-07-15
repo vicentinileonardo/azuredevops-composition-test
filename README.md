@@ -193,6 +193,19 @@ echo "PipelinePermission resource created, waiting for PipelinePermission resour
 kubectl wait pipelinepermissions.azuredevops.kog.krateo.io pipelinepermission-from-composition --for condition=Ready=True --namespace azuredevops-system --timeout=300s
 ```
 
+### Frontend
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/restaction.azuredevops-starter-compositiondefinition.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/restaction.azuredevops-starter-restaction-cleanup-schema-notordered.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/restaction.azuredevops-starter-schema.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/paragraph.azuredevops-starter-panel-paragraph-schema-notordered.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/button.azuredevops-starter-panel-button-schema-notordered.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/form.azuredevops-starter-form-notordered.yaml
+kubectl apply -f https://raw.githubusercontent.com/vicentinileonardo/azuredevops-starter/refs/heads/main/portal/panel.azuredevops-starter-panel-schema-notordered.yaml
+```
+
+
 ### Cleanup
 
 ```sh
