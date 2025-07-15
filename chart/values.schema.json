@@ -18,9 +18,7 @@
       ],
       "properties": {
         "organization": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Replace with your Azure DevOps organization name",
           "default": "\"krateo-kog\""
         }
@@ -35,30 +33,22 @@
       ],
       "properties": {
         "verbose": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "title": "Enable verbose logging",
           "default": "true"
         },
         "name": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Name of the Azure DevOps Team Project",
           "default": "\"project-from-composition\""
         },
         "description": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Description for the Azure DevOps Team Project",
           "default": "\"Created by Krateo Composition\""
         },
         "visibility": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Visibility of the Azure DevOps Team Project",
           "default": "private"
         },
@@ -73,9 +63,7 @@
               "required": [],
               "properties": {
                 "sourceControlType": {
-                  "type": [
-                    "string"
-                  ],
+                  "type": "string",
                   "title": "Type of source control",
                   "default": "\"Git\""
                 }
@@ -87,9 +75,7 @@
               "required": [],
               "properties": {
                 "templateTypeId": {
-                  "type": [
-                    "string"
-                  ],
+                  "type": "string",
                   "title": "ID of the process template type",
                   "default": "\"6b724908-ef14-45cf-84f8-768b5384da45\""
                 }
@@ -108,23 +94,17 @@
       ],
       "properties": {
         "verbose": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "title": "Enable verbose logging",
           "default": "true"
         },
         "name": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Name of the Azure DevOps Environment",
           "default": "\"environment-from-composition\""
         },
         "description": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Description for the Azure DevOps Environment",
           "default": "\"Created by Krateo Composition\""
         }
@@ -139,37 +119,27 @@
       ],
       "properties": {
         "verbose": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "title": "Enable verbose logging",
           "default": "true"
         },
         "name": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Name of the Azure DevOps Git Repository",
           "default": "\"repo-from-composition\""
         },
         "apiVersion": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Version of the API to use",
           "default": "\"7.2-preview.2\""
         },
         "initialize": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "title": "Whether to initialize the repository",
           "default": "true"
         },
         "defaultBranch": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Default branch for the Git Repository",
           "default": "\"refs/heads/main\""
         }
@@ -185,30 +155,22 @@
       ],
       "properties": {
         "verbose": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "title": "Enable verbose logging",
           "default": "true"
         },
         "apiVersion": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Version of the API to use",
           "default": "\"7.2-preview.1\""
         },
         "name": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Name of the Azure DevOps Pipeline",
           "default": "pipeline-from-composition"
         },
         "folder": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Folder where the pipeline will be created",
           "default": "\"test-folder-kog\""
         },
@@ -258,23 +220,17 @@
       ],
       "properties": {
         "verbose": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "title": "Enable verbose logging",
           "default": "true"
         },
         "name": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Name of the Azure DevOps PipelinePermission",
           "default": "pipelinepermission-from-composition"
         },
         "apiVersion": {
-          "type": [
-            "string"
-          ],
+          "type": "string",
           "title": "Version of the API to use",
           "default": "\"7.2-preview.1\""
         },
@@ -284,9 +240,7 @@
           "required": [],
           "properties": {
             "authorized": {
-              "type": [
-                "boolean"
-              ],
+              "type": "boolean",
               "title": "Whether to authorize all pipelines",
               "default": "false"
             }

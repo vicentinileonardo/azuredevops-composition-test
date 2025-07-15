@@ -19,7 +19,7 @@ spec:
           type: rest
           #payloadToOverride:
           #- name: metadata.name
-          #  value: ${ git.toRepo.name }
+          #  value: "test_placeholder"
   widgetDataTemplate:
     - forPath: stringSchema
       expression: ${ .getSchemaNotOrdered.data["values.schema.json"] }
